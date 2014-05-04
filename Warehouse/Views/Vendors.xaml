@@ -1,0 +1,31 @@
+﻿<Window x:Class="Warehouse.Views.Vendors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:Warehouse.ViewModels"
+        Title="Vendors" Height="300" Width="460"
+        Background="Gray">
+    
+    <Window.DataContext>
+        <vms:WarehouseViewModel/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel>
+            <Grid DataContext="{Binding NewVendor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Name="LabelVendorSearch" Content="Search for vendor:" Grid.Column="0" Background="LightGray" HorizontalContentAlignment="Right"/>
+                <TextBox Name="TextBoxVendorSearch"  Text="{Binding Name}" Grid.Column="1"/>
+                <Button Name="ButtonVendorSearch" Content="Search" Grid.Column="2"/>
+            </Grid>
+            <DataGrid ItemsSource="{Binding Vendors}" AutoGenerateColumns="False" CanUserResizeColumns="False" DockPanel.Dock="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Button Name="ButtonDeleteVendor" Content="Delete Vendor" Grid.Column="1" Command="{Binding DeleteVendor}"/>
+    </StackPanel>
+</Window>

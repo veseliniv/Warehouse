@@ -1,0 +1,18 @@
+﻿<Window x:Class="Warehouse.Views.AddNewVendor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:Warehouse.ViewModels"
+        Title="Add New Vendor" Height="300" Width="300"
+        Background="Gray" ResizeMode="NoResize">
+    
+    <Window.DataContext>
+        <vms:WarehouseViewModel/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel DataContext="{Binding NewVendor}">
+            <Label Content="Vendor Name :"/>
+            <TextBox Text="{Binding Name}" Margin="10"/>
+        </StackPanel>
+        <Button Content="Add Vendor" Command="{Binding AddNewVendor}" Margin="10"/>
+    </StackPanel>
+</Window>

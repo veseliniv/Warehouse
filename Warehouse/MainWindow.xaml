@@ -1,0 +1,20 @@
+﻿<Window Name="LoginWindow" x:Class="Warehouse.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:Warehouse.ViewModels"
+        Title="User Login" Height="200" Width="509"
+        Background="Gray" ResizeMode="NoResize">
+    
+    <Window.DataContext>
+        <vms:WarehouseViewModel/>
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel DataContext="{Binding NewUser}">
+            <Label Name="LableUsername" Content="Username :"/>
+            <TextBox Name="TextBoxUsernameLogin" Text="{Binding Username}" Margin="10"/>
+            <Label Name="LablePassword" Content="Password :"/>
+            <TextBox Name="TextBoxPassword" Text="{Binding Password}" Margin="10"/>
+        </StackPanel>
+        <Button Name="ButtonLogin" Content="Login" Command="{Binding LoginUser}" Margin="10"/>
+    </StackPanel>
+</Window>
