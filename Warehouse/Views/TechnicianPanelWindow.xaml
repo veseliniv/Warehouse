@@ -16,19 +16,10 @@
         </Grid.ColumnDefinitions>
         <GroupBox Header="Use Product" Grid.Column="0" Margin="10">
             
-            <StackPanel DataContext="{Binding Vendors}">
+            <StackPanel DataContext="{Binding Products}">
                 <ComboBox Name="comboBoxVendors" ItemsSource="{Binding}" 
-                          IsSynchronizedWithCurrentItem="True"
                           DisplayMemberPath="Name"/>
-                <ListBox ItemsSource="{Binding Path=Vendors.Products}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <ListBox ItemsSource="{Binding Path=Vendor1}"/>
                 <Button Content="Use Product"/>
             </StackPanel>
             

@@ -58,7 +58,7 @@ namespace Warehouse.DataPersisters
 
             var vendorToDelete =
                 (from vtd in entity.Vendors
-                where vtd.Name==vendor.Name
+                where vtd.Name == vendor.Name
                 select vtd).First();
 
             if (vendorToDelete!=null)
@@ -67,7 +67,6 @@ namespace Warehouse.DataPersisters
                 foreach (var item in del.ToList())
                 {
                     entity.Products.Remove(item);
-                    //entity.SaveChanges();
                 }
                 
                 entity.Vendors.Remove(vendorToDelete);
