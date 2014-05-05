@@ -24,8 +24,8 @@ namespace Warehouse
     {
         public MainWindow()
         {
-            //AddNewUser a = new AddNewUser();
-            //a.Show();
+            TechnicianPanelWindow a = new TechnicianPanelWindow();
+            a.Show();
             InitializeComponent();
         }
     }

@@ -13,7 +13,7 @@ using Warehouse.DataPersisters;
 
 namespace Warehouse.ViewModels
 {
-    public class WarehouseViewModel
+    public class WarehouseViewModel 
     {
         private ObservableCollection<ProductViewModel> productsViewModels;
         private ProductViewModel newProductViewModel;
