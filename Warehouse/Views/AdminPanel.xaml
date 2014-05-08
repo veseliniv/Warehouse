@@ -11,11 +11,11 @@
 
 <StackPanel>
     <Menu Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Gray">
-        <Button Content="Add New Product" Height="50" Width="100" Click="ButtonAddNewProductClick"/>
-        <Button Content="Add New User" Height="50" Width="100" Click="ButtonAddNewUserClick"/>
-        <Button Content="Add New Vendor" Height="50" Width="100" Click="ButtonAddNewVendorClick"/>
-        <Button Content="Users" Height="50" Width="100" Click="ButtonShowUsersClick"/>
-        <Button Content="Vendors" Height="50" Width="100" Click="ButtonShowVendorsClick"/>
+        <Button Content="Add New Product" Height="50" Width="100" Command="{Binding AddNewProductWindow}"/>
+        <Button Content="Add New User" Height="50" Width="100" Command="{Binding AddNewUserWindow}"/>
+        <Button Content="Add New Vendor" Height="50" Width="100" Command="{Binding AddNewVendorWindow}"/>
+        <Button Content="Users" Height="50" Width="100" Command="{Binding UsersWindow}"/>
+        <Button Content="Vendors" Height="50" Width="100" Command="{Binding VendorsWindow}"/>
     </Menu>
     <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserResizeColumns="False">
         <DataGrid.Columns>

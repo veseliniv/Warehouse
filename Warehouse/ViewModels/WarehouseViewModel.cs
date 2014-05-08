@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Warehouse.Commands;
 using Warehouse.DataLayer;
 using Warehouse.DataPersisters;
+using Warehouse.Views;
 
 namespace Warehouse.ViewModels
 {
@@ -33,8 +34,15 @@ namespace Warehouse.ViewModels
         private ICommand updateUserCommand;
         private ICommand loginUserCommand;
 
+        private ICommand openAddNewProductWindow;
+        private ICommand openAddNewUserWindow;
+        private ICommand openAddNewVendorWindow;
+        private ICommand openUsersWindow;
+        private ICommand openVendorsWindow;
+
         public WarehouseViewModel()
         {
+            //this.Products = new ObservableCollection<ProductViewModel>();
             this.newProductViewModel = new ProductViewModel();
             this.newVendorViewModel = new VendorViewModel();
             this.newUserViewModel = new UserViewModel();
@@ -365,6 +373,100 @@ namespace Warehouse.ViewModels
             {
                 MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+
+        public ICommand AddNewProductWindow
+        {
+            get
+            {
+                if (this.openAddNewProductWindow == null)
+                {
+                    this.openAddNewProductWindow = new RelayCommand(this.HandleAddNewProductWindowCommand);
+                }
+                return this.openAddNewProductWindow;
+            }
+        }
+
+        public ICommand AddNewUserWindow
+        {
+            get
+            {
+                if (this.openAddNewUserWindow == null)
+                {
+                    this.openAddNewUserWindow = new RelayCommand(this.HandleAddNewUserWindowCommand);
+                }
+                return this.openAddNewUserWindow;
+            }
+        }
+
+        public ICommand AddNewVendorWindow
+        {
+            get
+            {
+                if (this.openAddNewVendorWindow == null)
+                {
+                    this.openAddNewVendorWindow = new RelayCommand(this.HandleAddNewVendorWindowCommand);
+                }
+                return this.openAddNewVendorWindow;
+            }
+        }
+
+        public ICommand UsersWindow
+        {
+            get
+            {
+                if (this.openUsersWindow == null)
+                {
+                    this.openUsersWindow = new RelayCommand(this.HandleUsersWindowCommand);
+                }
+                return this.openUsersWindow;
+            }
+        }
+
+        public ICommand VendorsWindow
+        {
+            get
+            {
+                if (this.openVendorsWindow == null)
+                {
+                    this.openVendorsWindow = new RelayCommand(this.HandleVendorsWindowCommand);
+                }
+                return this.openVendorsWindow;
+            }
+        }
+
+        private void HandleVendorsWindowCommand(object obj)
+        {
+            Vendors vendorsWindow = new Vendors();
+
+            vendorsWindow.Show();
+        }
+
+        private void HandleUsersWindowCommand(object obj)
+        {
+            Users usersWindow = new Users();
+
+            usersWindow.Show();
+        }
+
+        private void HandleAddNewVendorWindowCommand(object obj)
+        {
+            AddNewVendor newVendor = new AddNewVendor();
+            newVendor.Show();
+        }
+
+        private void HandleAddNewUserWindowCommand(object obj)
+        {
+            AddNewUser newUserWindow = new AddNewUser();
+            newUserWindow.Show();
+        }
+
+        private void HandleAddNewProductWindowCommand(object obj)
+        {
+            AddNewProductWindow addNewProductWindow = new AddNewProductWindow();
+
+            addNewProductWindow.Show();
         }
     }
 }
