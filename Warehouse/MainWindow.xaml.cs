@@ -24,8 +24,6 @@ namespace Warehouse
     {
         public MainWindow()
         {
-            TechnicianPanelWindow a = new TechnicianPanelWindow();
-            a.Show();
             InitializeComponent();
         }
     }

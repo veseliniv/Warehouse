@@ -42,7 +42,6 @@ namespace Warehouse.ViewModels
 
         public WarehouseViewModel()
         {
-            //this.Products = new ObservableCollection<ProductViewModel>();
             this.newProductViewModel = new ProductViewModel();
             this.newVendorViewModel = new VendorViewModel();
             this.newUserViewModel = new UserViewModel();
