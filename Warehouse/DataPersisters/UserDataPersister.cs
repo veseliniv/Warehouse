@@ -82,33 +82,6 @@ namespace Warehouse.DataPersisters
             }
         }
 
-        public static void UpdateUser(UserViewModel user)
-        {
-            WarehouseEntities entity = new WarehouseEntities();
-
-            var userToUpdate =
-                from utu in entity.Users
-                where utu.Username==user.Username
-                select utu;
-
-            if (userToUpdate.Count() != 0)
-            {
-                foreach (var item in userToUpdate)
-                {
-                    item.Rank = user.Rank;
-                }
-
-                MessageBox.Show("User " + user.Username + " updated", "Confirmation", MessageBoxButton.OK);
-
-                entity.SaveChanges();
-            }
-            else
-            {
-                MessageBox.Show("User " + user.Username + " doesn't exist", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-        }
-
         public static void UserLogin(UserViewModel user)
         {
             var pass = Convert.ToString(Convert.ToBase64String(System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(user.Password))));
@@ -132,11 +105,6 @@ namespace Warehouse.DataPersisters
                     case "Worker":
                         TechnicianPanelWindow techPanelWindow = new TechnicianPanelWindow();
                         techPanelWindow.Show();
-                        break;
-
-                    case "Trainee":
-                        TraineePanelWindow traineePanelWindow=new TraineePanelWindow();
-                        traineePanelWindow.Show();
                         break;
                 }
                 Application.Current.MainWindow.Close();

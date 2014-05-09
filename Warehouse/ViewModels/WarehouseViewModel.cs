@@ -21,6 +21,7 @@ namespace Warehouse.ViewModels
         private ICommand addNewProductCommand;
         private ICommand deleteProductCommand;
         private ICommand updateProductCommand;
+        private ICommand useProductCommand;
 
         private ObservableCollection<VendorViewModel> vendorsViewModels;
         private VendorViewModel newVendorViewModel;
@@ -31,7 +32,6 @@ namespace Warehouse.ViewModels
         private UserViewModel newUserViewModel;
         private ICommand addNewUserCommand;
         private ICommand deleteUserCommand;
-        private ICommand updateUserCommand;
         private ICommand loginUserCommand;
 
         private ICommand openAddNewProductWindow;
@@ -118,6 +118,30 @@ namespace Warehouse.ViewModels
                     this.updateProductCommand = new RelayCommand(this.HandleUpdateProductCommand);
                 }
                 return this.updateProductCommand;
+            }
+        }
+
+        public ICommand UseProduct
+        {
+            get
+            {
+                if (this.useProductCommand == null)
+                {
+                    this.useProductCommand = new RelayCommand(this.HandleUseProductCommand);
+                }
+                return this.useProductCommand;
+            }
+        }
+
+        private void HandleUseProductCommand(object obj)
+        {
+            try
+            {
+                ProductDataPersister.UseProduct(this.NewProduct);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -303,18 +327,6 @@ namespace Warehouse.ViewModels
             }
         }
 
-        public ICommand UpdateUser
-        {
-            get
-            {
-                if (this.updateUserCommand == null)
-                {
-                    this.updateUserCommand = new RelayCommand(this.HandleUpdateUserCommand);
-                }
-                return this.updateUserCommand;
-            }
-        }
-
         public ICommand LoginUser
         {
             get
@@ -362,19 +374,6 @@ namespace Warehouse.ViewModels
                 MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
-        private void HandleUpdateUserCommand(object obj)
-        {
-            try
-            {
-                UserDataPersister.UpdateUser(this.NewUser);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
 
         public ICommand AddNewProductWindow
         {
@@ -446,7 +445,6 @@ namespace Warehouse.ViewModels
         private void HandleUsersWindowCommand(object obj)
         {
             Users usersWindow = new Users();
-
             usersWindow.Show();
         }
 
@@ -465,7 +463,6 @@ namespace Warehouse.ViewModels
         private void HandleAddNewProductWindowCommand(object obj)
         {
             AddNewProductWindow addNewProductWindow = new AddNewProductWindow();
-
             addNewProductWindow.Show();
         }
     }

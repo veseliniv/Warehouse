@@ -133,5 +133,31 @@ namespace Warehouse.DataPersisters
                 MessageBox.Show("Product " + product.Name + " doesn't exist", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        internal static void UseProduct(ProductViewModel product)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+
+            var productToUse =
+                    from ptu in entity.Products
+                    where ptu.Name.Contains(product.Name) && ptu.Vendor1.Name.Contains(product.Vendor.Name)
+                    select ptu;
+
+            if (productToUse.Count() != 0)
+            {
+                foreach (var item in productToUse)
+                {
+                    item.Quantity -= product.Quantity;
+                }
+
+                MessageBox.Show("Product " + product.Name + " used", "Confirmation", MessageBoxButton.OK);
+
+                entity.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Product " + product.Name + " doesn't exist", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }

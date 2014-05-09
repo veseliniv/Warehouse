@@ -11,14 +11,7 @@
     <StackPanel>
         <StackPanel>
             <Grid DataContext="{Binding NewVendor}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Name="LabelVendorSearch" Content="Search for vendor:" Grid.Column="0" Background="LightGray" HorizontalContentAlignment="Right"/>
-                <TextBox Name="TextBoxVendorSearch"  Text="{Binding Name}" Grid.Column="1"/>
-                <Button Name="ButtonVendorSearch" Content="Search" Grid.Column="2"/>
+                <TextBox Text="{Binding Name}" Grid.Column="1"/>
             </Grid>
             <DataGrid ItemsSource="{Binding Vendors}" AutoGenerateColumns="False" CanUserResizeColumns="False" DockPanel.Dock="Top">
                 <DataGrid.Columns>

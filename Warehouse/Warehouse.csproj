@@ -83,9 +83,6 @@
     <Compile Include="Views\TechnicianPanelWindow.xaml.cs">
       <DependentUpon>TechnicianPanelWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TraineePanelWindow.xaml.cs">
-      <DependentUpon>TraineePanelWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Users.xaml.cs">
       <DependentUpon>Users.xaml</DependentUpon>
     </Compile>
@@ -121,10 +118,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TechnicianPanelWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TraineePanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

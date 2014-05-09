@@ -9,28 +9,14 @@
     </Window.DataContext>
     <StackPanel>
         <Grid DataContext="{Binding NewUser}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Name="LabelUserSearch" Content="Search for user:" Grid.Column="0" Background="LightGray" HorizontalContentAlignment="Right"/> 
-            <TextBox Name="TextBoxUserSearch" Text="{Binding Username}" Grid.Column="1"/>
-            <Button Name="ButtonUserSearch" Content="Search" Grid.Column="2"/>
+            <TextBox Text="{Binding Username}"/>
         </Grid>
-        <DataGrid ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserResizeColumns="False">
+        <DataGrid Name="DataGridUsers" ItemsSource="{Binding Users}" AutoGenerateColumns="False" CanUserResizeColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
                 <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Name="ButtonEditUser" Content="Edit User" Grid.Column="0"/>
-            <Button Name="ButtonDeleteUser" Content="Delete User" Command="{Binding DeleteUser}" Grid.Column="1"/>
-        </Grid>
+        <Button Name="ButtonDeleteUser" Content="Delete User" Command="{Binding DeleteUser}" Grid.ColumnSpan="1"/>
     </StackPanel>
 </Window>

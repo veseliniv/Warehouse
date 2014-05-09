@@ -21,6 +21,6 @@
             <Label Content="Vendor :"/>
             <ComboBox ItemsSource="{Binding Vendors}" DisplayMemberPath="Name" SelectedItem="{Binding NewProduct.Vendor}" Grid.Row="3"  Margin="10"/>
         </StackPanel>
-        <Button Content="Add Product" Grid.Row="4" Command="{Binding AddNewProduct}" Margin="10"/>
+        <Button Content="Add Product" Command="{Binding AddNewProduct}" Margin="10"/>
     </StackPanel>
 </Window>
