@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Classes
 {
-    public enum Ranks : int
+    public enum Ranks
     {
-        Admin = 1,
-        Worker = 2
+        Admin ,
+        Worker
     }
 }
