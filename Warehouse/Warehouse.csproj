@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Ranks.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DataPersisters\ProductDataPersister.cs" />
     <Compile Include="DataPersisters\UserDataPersister.cs" />

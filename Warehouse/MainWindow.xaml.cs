@@ -25,6 +25,9 @@ namespace Warehouse
         public MainWindow()
         {
             InitializeComponent();
+
+            AddNewUser a = new AddNewUser();
+            a.Show();
         }
     }
 }

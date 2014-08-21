@@ -12,7 +12,7 @@ namespace Warehouse.DataPersisters
 {
     public class VendorDataPersister
     {
-        public static IEnumerable<VendorViewModel> GetAllVendors()
+        internal static IEnumerable<VendorViewModel> GetAllVendors()
         {
             WarehouseEntities entity = new WarehouseEntities();
 

@@ -12,7 +12,7 @@ namespace Warehouse.DataPersisters
 {
     public class ProductDataPersister
     {
-        public static IEnumerable<ProductViewModel> GetAllProducts()
+        internal static IEnumerable<ProductViewModel> GetAllProducts()
         {
             WarehouseEntities entity = new WarehouseEntities();
 
@@ -49,7 +49,6 @@ namespace Warehouse.DataPersisters
             }
             else if (productToAdd.Vendor1.Name.Equals(product.Vendor.Name))
             {
-                MessageBox.Show("OK");
                 entity.Products.Add(new Product()
                                     {
                                         Name = product.Name,

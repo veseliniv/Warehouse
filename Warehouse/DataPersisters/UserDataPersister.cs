@@ -12,7 +12,7 @@ namespace Warehouse.DataPersisters
 {
     public class UserDataPersister
     {
-        public static IEnumerable<UserViewModel> GetAllUsers()
+        internal static IEnumerable<UserViewModel> GetAllUsers()
         {
             WarehouseEntities entity = new WarehouseEntities();
 
@@ -27,7 +27,7 @@ namespace Warehouse.DataPersisters
             return allUsers;
         }
 
-        public static void AddUser(UserViewModel user)
+        internal static void AddUser(UserViewModel user)
         {
             WarehouseEntities entity = new WarehouseEntities();
 
@@ -55,7 +55,7 @@ namespace Warehouse.DataPersisters
             }
         }
 
-        public static void DeleteUser(UserViewModel user)
+        internal static void DeleteUser(UserViewModel user)
         {
             WarehouseEntities entity = new WarehouseEntities();
 
@@ -82,7 +82,7 @@ namespace Warehouse.DataPersisters
             }
         }
 
-        public static void UserLogin(UserViewModel user)
+        internal static void UserLogin(UserViewModel user)
         {
             var pass = Convert.ToString(Convert.ToBase64String(System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(user.Password))));
 
