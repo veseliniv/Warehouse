@@ -22,7 +22,8 @@ namespace Warehouse.DataPersisters
                        {
                            Name = ap.Name,
                            Quantity = ap.Quantity,
-                           Price = ap.Price,
+                           BuyPrice = ap.BuyPrice,
+                           SellPrice = ap.SellPrice,
                            Vendor = new VendorViewModel()
                                     {
                                         Name = ap.Vendor1.Name
@@ -52,7 +53,8 @@ namespace Warehouse.DataPersisters
                 entity.Products.Add(new Product()
                                     {
                                         Name = product.Name,
-                                        Price = product.Price,
+                                        BuyPrice = product.BuyPrice,
+                                        SellPrice = product.SellPrice,
                                         Quantity = product.Quantity,
                                         Vendor = productToAdd.Vendor
                                     });
@@ -66,7 +68,8 @@ namespace Warehouse.DataPersisters
                 entity.Products.Add(new Product()
                                     {
                                         Name = product.Name,
-                                        Price = product.Price,
+                                        BuyPrice = product.BuyPrice,
+                                        SellPrice = product.SellPrice,
                                         Quantity = product.Quantity,
                                         Vendor1 = new Vendor()
                                                   {
@@ -120,7 +123,7 @@ namespace Warehouse.DataPersisters
                 foreach (var item in productToUpdate)
                 {
                     item.Quantity += product.Quantity;
-                    item.Price = product.Price;
+                    item.BuyPrice = product.BuyPrice;
                 }
 
                 MessageBox.Show("Product " + product.Name + " updated", "Confirmation", MessageBoxButton.OK);

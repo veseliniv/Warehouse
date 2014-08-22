@@ -17,8 +17,9 @@ namespace Warehouse.DataLayer
         public int ProductID { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
         public int Vendor { get; set; }
+        public decimal BuyPrice { get; set; }
+        public decimal SellPrice { get; set; }
     
         public virtual Vendor Vendor1 { get; set; }
     }

@@ -17,6 +17,6 @@
                 <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="ButtonDeleteUser" Content="Delete User" Command="{Binding DeleteUser}" Grid.ColumnSpan="1"/>
+        <Button Name="ButtonDeleteUser" Content="Delete User" Command="{Binding DeleteUser}"/>
     </StackPanel>
 </Window>

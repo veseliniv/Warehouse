@@ -8,7 +8,7 @@ namespace Warehouse.Classes
 {
     public enum Ranks
     {
-        Admin ,
+        Admin,
         Worker
     }
 }

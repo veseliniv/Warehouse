@@ -12,7 +12,9 @@ namespace Warehouse.ViewModels
 
         public int Quantity { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal BuyPrice { get; set; }
+
+        public decimal SellPrice { get; set; }
 
         public VendorViewModel Vendor { get; set; }
     }
