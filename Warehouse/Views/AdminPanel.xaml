@@ -16,6 +16,7 @@
         <Button Content="Add New Vendor" Height="50" Width="100" Command="{Binding AddNewVendorWindow}"/>
         <Button Content="Users" Height="50" Width="100" Command="{Binding UsersWindow}"/>
         <Button Content="Vendors" Height="50" Width="100" Command="{Binding VendorsWindow}"/>
+        <Button Content="Reports" Height="50" Width="100" Command="{Binding ReportsWindow}"/>
     </Menu>
     <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" CanUserResizeColumns="False">
         <DataGrid.Columns>
@@ -24,6 +25,7 @@
             <DataGridTextColumn Header="Buy Price" Binding="{Binding BuyPrice}" Width="*"/>
             <DataGridTextColumn Header="Sell Price" Binding="{Binding SellPrice}" Width="*"/>
             <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
+            <DataGridTextColumn Header="Date Of Purchase" Binding="{Binding DayOfPurchase}" Width="*"/>
         </DataGrid.Columns>
     </DataGrid>
 </StackPanel>

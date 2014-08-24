@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Warehouse.DataPersisters
                            Quantity = ap.Quantity,
                            BuyPrice = ap.BuyPrice,
                            SellPrice = ap.SellPrice,
+                           DayOfPurchase = ap.DayOfPurchase,
                            Vendor = new VendorViewModel()
                                     {
                                         Name = ap.Vendor1.Name
@@ -56,6 +58,7 @@ namespace Warehouse.DataPersisters
                                         BuyPrice = product.BuyPrice,
                                         SellPrice = product.SellPrice,
                                         Quantity = product.Quantity,
+                                        DayOfPurchase = DateTime.Now,
                                         Vendor = productToAdd.Vendor
                                     });
 
@@ -71,6 +74,7 @@ namespace Warehouse.DataPersisters
                                         BuyPrice = product.BuyPrice,
                                         SellPrice = product.SellPrice,
                                         Quantity = product.Quantity,
+                                        DayOfPurchase = DateTime.Now,
                                         Vendor1 = new Vendor()
                                                   {
                                                       Name = product.Vendor.Name
@@ -150,6 +154,7 @@ namespace Warehouse.DataPersisters
                 foreach (var item in productToUse)
                 {
                     item.Quantity -= product.Quantity;
+                    item.DayOfSale = DateTime.Now;
                 }
 
                 MessageBox.Show("Product " + product.Name + " used", "Confirmation", MessageBoxButton.OK);
@@ -160,6 +165,31 @@ namespace Warehouse.DataPersisters
             {
                 MessageBox.Show("Product " + product.Name + " doesn't exist", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        internal static IEnumerable<ProductViewModel> GetProductReport(ProductViewModel product)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+
+            var productReport =
+                (from pr in entity.Products
+                where pr.DayOfPurchase.Day.Equals(product.DayOfPurchase.Day)
+                      && pr.DayOfPurchase.Month.Equals(product.DayOfPurchase.Month)
+                      && pr.DayOfPurchase.Year.Equals(product.DayOfPurchase.Year)
+                select new ProductViewModel()
+                       {
+                           Name = pr.Name,
+                           Quantity = pr.Quantity,
+                           BuyPrice = pr.BuyPrice,
+                           SellPrice = pr.SellPrice,
+                           DayOfPurchase = pr.DayOfPurchase,
+                           Vendor = new VendorViewModel()
+                           {
+                               Name = pr.Vendor1.Name
+                           }
+                       }).ToList();
+
+            return productReport; 
         }
     }
 }

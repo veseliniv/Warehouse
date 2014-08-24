@@ -15,6 +15,8 @@
           <Property Name="Vendor" Type="int" Nullable="false" />
           <Property Name="SellPrice" Type="money" Nullable="false" />
           <Property Name="BuyPrice" Type="money" Nullable="false" />
+          <Property Name="DayOfPurchase" Type="date" />
+          <Property Name="DayOfSale" Type="date" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -68,6 +70,8 @@
           <NavigationProperty Name="Vendor1" Relationship="Self.FK_Products_Vendors" FromRole="Products" ToRole="Vendors" />
           <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DayOfPurchase" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="DayOfSale" Type="DateTime" Precision="0" Nullable="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -116,6 +120,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="WarehouseModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="DayOfSale" ColumnName="DayOfSale" />
+                <ScalarProperty Name="DayOfPurchase" ColumnName="DayOfPurchase" />
                 <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
                 <ScalarProperty Name="BuyPrice" ColumnName="BuyPrice" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />

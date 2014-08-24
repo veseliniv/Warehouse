@@ -20,6 +20,8 @@ namespace Warehouse.DataLayer
         public int Vendor { get; set; }
         public decimal BuyPrice { get; set; }
         public decimal SellPrice { get; set; }
+        public System.DateTime DayOfPurchase { get; set; }
+        public Nullable<System.DateTime> DayOfSale { get; set; }
     
         public virtual Vendor Vendor1 { get; set; }
     }

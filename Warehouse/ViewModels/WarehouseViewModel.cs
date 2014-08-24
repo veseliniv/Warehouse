@@ -17,11 +17,13 @@ namespace Warehouse.ViewModels
     public class WarehouseViewModel 
     {
         private ObservableCollection<ProductViewModel> productsViewModels;
+        private ObservableCollection<ProductViewModel> productsReports;
         private ProductViewModel newProductViewModel;
         private ICommand addNewProductCommand;
         private ICommand deleteProductCommand;
         private ICommand updateProductCommand;
         private ICommand useProductCommand;
+        private ICommand getProductReport;
 
         private ObservableCollection<VendorViewModel> vendorsViewModels;
         private VendorViewModel newVendorViewModel;
@@ -39,6 +41,7 @@ namespace Warehouse.ViewModels
         private ICommand openAddNewVendorWindow;
         private ICommand openUsersWindow;
         private ICommand openVendorsWindow;
+        private ICommand openReportsWindow;
 
         public WarehouseViewModel()
         {
@@ -68,6 +71,26 @@ namespace Warehouse.ViewModels
                 foreach (var item in value)
                 {
                     this.productsViewModels.Add(item);
+                }
+            }
+        }
+
+        public IEnumerable<ProductViewModel> ProductsReports
+        {
+            get
+            {
+                return this.productsReports;
+            }
+            set 
+            {
+                if (this.productsReports == null)
+                {
+                    this.productsReports = new ObservableCollection<ProductViewModel>();
+                }
+                //this.productsReports.Clear();
+                foreach (var item in value)
+                {
+                    this.productsReports.Add(item);
                 }
             }
         }
@@ -129,6 +152,30 @@ namespace Warehouse.ViewModels
                     this.useProductCommand = new RelayCommand(this.HandleUseProductCommand);
                 }
                 return this.useProductCommand;
+            }
+        }
+
+        public ICommand ProductReport
+        {
+            get
+            {
+                if (this.getProductReport == null)
+                {
+                    this.getProductReport = new RelayCommand(this.HandleProductReportCommand);
+                }
+                return this.getProductReport;
+            }
+        }
+
+        private void HandleProductReportCommand(object obj)
+        {
+            try
+            {
+                this.ProductsReports = ProductDataPersister.GetProductReport(this.NewProduct);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -434,6 +481,19 @@ namespace Warehouse.ViewModels
             }
         }
 
+        public ICommand ReportsWindow
+        {
+            get
+            {
+                if (this.openReportsWindow == null)
+                {
+                    this.openReportsWindow = new RelayCommand(this.HandleReportsWindowCommand);
+                }
+                return this.openReportsWindow;
+            }
+        }
+
+        
         private void HandleVendorsWindowCommand(object obj)
         {
             Vendors vendorsWindow = new Vendors();
@@ -464,5 +524,13 @@ namespace Warehouse.ViewModels
             AddNewProductWindow addNewProductWindow = new AddNewProductWindow();
             addNewProductWindow.Show();
         }
+
+        private void HandleReportsWindowCommand(object obj)
+        {
+            ReportWindow reportsWindow = new ReportWindow();
+
+            reportsWindow.Show();
+        }
+
     }
 }

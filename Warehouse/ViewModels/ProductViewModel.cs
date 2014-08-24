@@ -16,6 +16,10 @@ namespace Warehouse.ViewModels
 
         public decimal SellPrice { get; set; }
 
+        public DateTime DayOfPurchase { get; set; }
+
+        public DateTime DayOfSale { get; set; }
+
         public VendorViewModel Vendor { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +26,15 @@ namespace Warehouse
     {
         public MainWindow()
         {
+            CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
+            ci.DateTimeFormat.DateSeparator = "-";
+            Thread.CurrentThread.CurrentCulture = ci;
+
             InitializeComponent();
+
+            ReportWindow a = new ReportWindow();
+            a.Show();
         }
     }
 }
