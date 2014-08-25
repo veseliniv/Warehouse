@@ -11,14 +11,12 @@
     
     <StackPanel>
         <Grid DataContext="{Binding NewProduct}">
-            <DatePicker SelectedDate="{Binding DayOfPurchase}"/>
+            <DatePicker SelectedDate="{Binding DayOfPurchase}" DisplayDateStart="2014-08-25"/>
         </Grid>
         <DataGrid Name="DataGridReports" ItemsSource="{Binding ProductsReports}" AutoGenerateColumns="False" CanUserResizeColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
-                <DataGridTextColumn Header="Buy Price" Binding="{Binding BuyPrice}" Width="*"/>
-                <DataGridTextColumn Header="Sell Price" Binding="{Binding SellPrice}" Width="*"/>
                 <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
                 <DataGridTextColumn Header="Date Of Purchase" Binding="{Binding DayOfPurchase}" Width="*"/>
             </DataGrid.Columns>

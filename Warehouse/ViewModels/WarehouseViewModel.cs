@@ -14,10 +14,9 @@ using Warehouse.Views;
 
 namespace Warehouse.ViewModels
 {
-    public class WarehouseViewModel 
+    public class WarehouseViewModel : BaseViewModel
     {
         private ObservableCollection<ProductViewModel> productsViewModels;
-        private ObservableCollection<ProductViewModel> productsReports;
         private ProductViewModel newProductViewModel;
         private ICommand addNewProductCommand;
         private ICommand deleteProductCommand;
@@ -79,19 +78,20 @@ namespace Warehouse.ViewModels
         {
             get
             {
-                return this.productsReports;
+                return this.productsViewModels;
             }
             set 
             {
-                if (this.productsReports == null)
+                if (this.productsViewModels == null)
                 {
-                    this.productsReports = new ObservableCollection<ProductViewModel>();
+                    this.productsViewModels = new ObservableCollection<ProductViewModel>();
                 }
-                //this.productsReports.Clear();
+                this.productsViewModels.Clear();
                 foreach (var item in value)
                 {
-                    this.productsReports.Add(item);
+                    this.productsViewModels.Add(item);
                 }
+                this.OnPropertyChanged("ProductsReports");
             }
         }
 

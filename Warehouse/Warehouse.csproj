@@ -65,6 +65,7 @@
     <Compile Include="DataPersisters\ProductDataPersister.cs" />
     <Compile Include="DataPersisters\UserDataPersister.cs" />
     <Compile Include="DataPersisters\VendorDataPersister.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VendorViewModel.cs" />
