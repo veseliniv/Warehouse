@@ -22,7 +22,8 @@ namespace Warehouse.ViewModels
         private ICommand deleteProductCommand;
         private ICommand updateProductCommand;
         private ICommand useProductCommand;
-        private ICommand getProductReport;
+        private ICommand getProductReportPurchasesCommand;
+        private ICommand getProductReportSalesCommand;
 
         private ObservableCollection<VendorViewModel> vendorsViewModels;
         private VendorViewModel newVendorViewModel;
@@ -155,23 +156,48 @@ namespace Warehouse.ViewModels
             }
         }
 
-        public ICommand ProductReport
+        public ICommand ProductReportPurchases
         {
             get
             {
-                if (this.getProductReport == null)
+                if (this.getProductReportPurchasesCommand == null)
                 {
-                    this.getProductReport = new RelayCommand(this.HandleProductReportCommand);
+                    this.getProductReportPurchasesCommand = new RelayCommand(this.HandleProductReportPurchasesCommand);
                 }
-                return this.getProductReport;
+                return this.getProductReportPurchasesCommand;
             }
         }
 
-        private void HandleProductReportCommand(object obj)
+        public ICommand ProductReportSales
+        {
+            get
+            {
+                if (this.getProductReportSalesCommand == null)
+                {
+                    this.getProductReportSalesCommand = new RelayCommand(this.HandleProductReportSalesCommand);
+                }
+                return this.getProductReportSalesCommand;
+            }
+        }
+
+        private void HandleProductReportSalesCommand(object obj)
         {
             try
             {
-                this.ProductsReports = ProductDataPersister.GetProductReport(this.NewProduct);
+                this.ProductsReports = ProductDataPersister.GetProductReportSales(this.NewProduct);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private void HandleProductReportPurchasesCommand(object obj)
+        {
+            try
+            {
+                this.ProductsReports = ProductDataPersister.GetProductReportPurchases(this.NewProduct);
             }
             catch (Exception ex)
             {

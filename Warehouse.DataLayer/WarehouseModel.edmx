@@ -71,7 +71,7 @@
           <Property Name="BuyPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="DayOfPurchase" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="DayOfSale" Type="DateTime" Precision="0" Nullable="true" />
+          <Property Name="DayOfSale" Type="DateTime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>

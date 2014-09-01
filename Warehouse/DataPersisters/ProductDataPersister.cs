@@ -167,29 +167,54 @@ namespace Warehouse.DataPersisters
             }
         }
 
-        internal static IEnumerable<ProductViewModel> GetProductReport(ProductViewModel product)
+        internal static IEnumerable<ProductViewModel> GetProductReportPurchases(ProductViewModel product)
         {
             WarehouseEntities entity = new WarehouseEntities();
 
-            var productReport =
-                (from pr in entity.Products
-                where pr.DayOfPurchase.Day.Equals(product.DayOfPurchase.Day)
-                      && pr.DayOfPurchase.Month.Equals(product.DayOfPurchase.Month)
-                      && pr.DayOfPurchase.Year.Equals(product.DayOfPurchase.Year)
+            var productReportPurchases =
+                (from prp in entity.Products
+                where prp.DayOfPurchase.Day.Equals(product.DayOfPurchase.Day)
+                      && prp.DayOfPurchase.Month.Equals(product.DayOfPurchase.Month)
+                      && prp.DayOfPurchase.Year.Equals(product.DayOfPurchase.Year)
                 select new ProductViewModel()
                        {
-                           Name = pr.Name,
-                           Quantity = pr.Quantity,
-                           BuyPrice = pr.BuyPrice,
-                           SellPrice = pr.SellPrice,
-                           DayOfPurchase = pr.DayOfPurchase,
+                           Name = prp.Name,
+                           Quantity = prp.Quantity,
+                           BuyPrice = prp.BuyPrice,
+                           SellPrice = prp.SellPrice,
+                           DayOfPurchase = prp.DayOfPurchase,
                            Vendor = new VendorViewModel()
                            {
-                               Name = pr.Vendor1.Name
+                               Name = prp.Vendor1.Name
                            }
                        }).ToList();
 
-            return productReport; 
+            return productReportPurchases; 
+        }
+
+        internal static IEnumerable<ProductViewModel> GetProductReportSales(ProductViewModel product)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+
+            var productReportSales =
+                (from prs in entity.Products
+                 where prs.DayOfSale.Day.Equals(product.DayOfSale.Day)
+                       && prs.DayOfSale.Month.Equals(product.DayOfSale.Month)
+                       && prs.DayOfSale.Year.Equals(product.DayOfSale.Year)
+                 select new ProductViewModel()
+                 {
+                     Name = prs.Name,
+                     Quantity = prs.Quantity,
+                     BuyPrice = prs.BuyPrice,
+                     SellPrice = prs.SellPrice,
+                     DayOfSale = prs.DayOfSale,
+                     Vendor = new VendorViewModel()
+                     {
+                         Name = prs.Vendor1.Name
+                     }
+                 }).ToList();
+
+            return productReportSales;
         }
     }
 }

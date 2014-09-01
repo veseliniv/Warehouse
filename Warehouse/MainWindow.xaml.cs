@@ -26,11 +26,6 @@ namespace Warehouse
     {
         public MainWindow()
         {
-            CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
-            ci.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
-            ci.DateTimeFormat.DateSeparator = "-";
-            Thread.CurrentThread.CurrentCulture = ci;
-
             InitializeComponent();
 
             ReportWindow a = new ReportWindow();

@@ -2,25 +2,49 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vms="clr-namespace:Warehouse.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Reports" Height="300" Width="300">
     
     <Window.DataContext>
         <vms:WarehouseViewModel/>
     </Window.DataContext>
-    
-    
-    <StackPanel>
-        <Grid DataContext="{Binding NewProduct}">
-            <DatePicker SelectedDate="{Binding DayOfPurchase}" DisplayDateStart="2014-08-25"/>
-        </Grid>
-        <DataGrid Name="DataGridReports" ItemsSource="{Binding ProductsReports}" AutoGenerateColumns="False" CanUserResizeColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
-                <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
-                <DataGridTextColumn Header="Date Of Purchase" Binding="{Binding DayOfPurchase}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Name="GetReport" Content="Get Report" Command="{Binding ProductReport}"/>
-    </StackPanel>
+
+    <TabControl>
+        <TabItem Header="Purchases Report">
+            <StackPanel>
+                <Grid DataContext="{Binding NewProduct}">
+                    <DatePicker  Name="datePickerPurchase" SelectedDate="{Binding DayOfPurchase}"/>
+                </Grid>
+                <DataGrid Name="DataGridPurchase" ItemsSource="{Binding ProductsReports}" AutoGenerateColumns="False" CanUserResizeColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Buy Price" Binding="{Binding BuyPrice}" Width="*"/>
+                        <DataGridTextColumn Header="Date Of Purchase" Binding="{Binding DayOfPurchase}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Name="GetReportPurchases" Content="Get Report" Command="{Binding ProductReportPurchases}"/>
+                <Button Name="PurchasesExport" Content="Purchases Export" Click="PurchasesExportClick" Grid.Column="0"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Sales Report">
+            <StackPanel>
+                <Grid DataContext="{Binding NewProduct}">
+                    <DatePicker  Name="datePickerSale" SelectedDate="{Binding DayOfSale}"/>
+                </Grid>
+                <DataGrid Name="DataGridSale" ItemsSource="{Binding ProductsReports}" AutoGenerateColumns="False" CanUserResizeColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Buy Price" Binding="{Binding SellPrice}" Width="*"/>
+                        <DataGridTextColumn Header="Date Of Sale" Binding="{Binding DayOfSale}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Name="aaa" Content="Get Report" Command="{Binding ProductReportSales}"/>
+                <Button Name="SalesExport" Content="Sales Export" Click="SalesExportClick"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Window>
