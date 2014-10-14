@@ -34,7 +34,6 @@ namespace Warehouse.ViewModels
         private UserViewModel newUserViewModel;
         private ICommand addNewUserCommand;
         private ICommand deleteUserCommand;
-        private ICommand loginUserCommand;
 
         private ICommand openAddNewProductWindow;
         private ICommand openAddNewUserWindow;
@@ -93,6 +92,27 @@ namespace Warehouse.ViewModels
                     this.productsViewModels.Add(item);
                 }
                 this.OnPropertyChanged("ProductsReports");
+            }
+        }
+
+        public IEnumerable<ProductViewModel> ProductsAdded
+        {
+            get
+            {
+                return this.productsViewModels;
+            }
+            set
+            {
+                if (this.productsViewModels == null)
+                {
+                    this.productsViewModels = new ObservableCollection<ProductViewModel>();
+                }
+                this.productsViewModels.Clear();
+                foreach (var item in value)
+                {
+                    this.productsViewModels.Add(item);
+                }
+                this.OnPropertyChanged("ProductsAdded");
             }
         }
 
@@ -396,30 +416,6 @@ namespace Warehouse.ViewModels
                     this.deleteUserCommand = new RelayCommand(this.HandleDeleteUserCommand);
                 }
                 return this.deleteUserCommand;
-            }
-        }
-
-        public ICommand LoginUser
-        {
-            get
-            {
-                if (this.loginUserCommand == null)
-                {
-                    this.loginUserCommand = new RelayCommand(this.HandleLoginUserCommand);
-                }
-                return this.loginUserCommand;
-            }
-        }
-
-        private void HandleLoginUserCommand(object obj)
-        {
-            try
-            {
-                UserDataPersister.UserLogin(this.NewUser);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

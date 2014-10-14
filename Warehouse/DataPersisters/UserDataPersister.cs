@@ -82,37 +82,5 @@ namespace Warehouse.DataPersisters
             }
         }
 
-        internal static void UserLogin(UserViewModel user)
-        {
-            var pass = Convert.ToString(Convert.ToBase64String(System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(user.Password))));
-
-            WarehouseEntities entity = new WarehouseEntities();
-
-            var userToLogin =
-                (from utl in entity.Users
-                where utl.Username == user.Username && utl.Password == pass
-                select utl).First();
-
-            if(userToLogin!=null)
-            {
-                switch(userToLogin.Rank)
-                {
-                    case "Admin": 
-                        AdminPanel adminPanelWindow = new AdminPanel();
-                        adminPanelWindow.Show();
-                        break;
-
-                    case "Worker":
-                        TechnicianPanelWindow techPanelWindow = new TechnicianPanelWindow();
-                        techPanelWindow.Show();
-                        break;
-                }
-                Application.Current.MainWindow.Close();
-            }
-            else
-            {
-                MessageBox.Show("Wrong username or password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 }

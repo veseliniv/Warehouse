@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Warehouse.Classes;
+using Warehouse.DataPersisters;
 
 namespace Warehouse.Views
 {
@@ -66,6 +67,8 @@ namespace Warehouse.Views
                 File.WriteAllText(saveFile.FileName, result);
                 MessageBox.Show("Exporting DataGrid data to Excel file created");
             }
+
+            
         }
     }
 }

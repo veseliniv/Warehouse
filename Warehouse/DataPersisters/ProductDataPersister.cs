@@ -40,32 +40,34 @@ namespace Warehouse.DataPersisters
             WarehouseEntities entity = new WarehouseEntities();
 
             var productToAdd =
-                (from pta in entity.Products
-                where (pta.Name.Contains(product.Name) && pta.Vendor1.Name.Contains(product.Vendor.Name)) ||
-                       (pta.Vendor1.Name.Contains(product.Vendor.Name))
-                select pta).First();
+                from pta in entity.Products
+                where ((pta.Name == product.Name) && (pta.Vendor1.Name == product.Vendor.Name)) ||
+                       (pta.Vendor1.Name == product.Vendor.Name)
+                select pta;
 
+            //if (productToAdd.Count() != null)
+            //{
+                if ((product.Name.Equals(productToAdd.FirstOrDefault().Name)) && (product.Vendor.Name.Equals(productToAdd.FirstOrDefault().Vendor1.Name)))
+                {
+                    MessageBox.Show("Product " + product.Name + " exists!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else if (product.Vendor.Name.Equals(productToAdd.FirstOrDefault().Vendor1.Name))
+                {
+                    entity.Products.Add(new Product()
+                                        {
+                                            Name = product.Name,
+                                            BuyPrice = product.BuyPrice,
+                                            SellPrice = product.SellPrice,
+                                            Quantity = product.Quantity,
+                                            DayOfPurchase = DateTime.Now,
+                                            Vendor = productToAdd.FirstOrDefault().Vendor
+                                        });
 
-            if (productToAdd.Name.Equals(product.Name) && productToAdd.Vendor1.Name.Equals(product.Vendor.Name))
-            {
-                MessageBox.Show("Product " + product.Name + " exists!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else if (productToAdd.Vendor1.Name.Equals(product.Vendor.Name))
-            {
-                entity.Products.Add(new Product()
-                                    {
-                                        Name = product.Name,
-                                        BuyPrice = product.BuyPrice,
-                                        SellPrice = product.SellPrice,
-                                        Quantity = product.Quantity,
-                                        DayOfPurchase = DateTime.Now,
-                                        Vendor = productToAdd.Vendor
-                                    });
+                    MessageBox.Show("Product " + product.Name + " added!", "Confirmation", MessageBoxButton.OK);
 
-                MessageBox.Show("Product " + product.Name + " added!", "Confirmation", MessageBoxButton.OK);
-
-                entity.SaveChanges();
-            }
+                    entity.SaveChanges();
+                }
+            //}
             else
             {
                 entity.Products.Add(new Product()
@@ -155,6 +157,14 @@ namespace Warehouse.DataPersisters
                 {
                     item.Quantity -= product.Quantity;
                     item.DayOfSale = DateTime.Now;
+                    if (item.SaleQuantity == null)
+                    {
+                        item.SaleQuantity = product.Quantity;
+                    }
+                    else
+                    {
+                        item.SaleQuantity += product.Quantity;
+                    }
                 }
 
                 MessageBox.Show("Product " + product.Name + " used", "Confirmation", MessageBoxButton.OK);
@@ -205,6 +215,7 @@ namespace Warehouse.DataPersisters
                  {
                      Name = prs.Name,
                      Quantity = prs.Quantity,
+                     SaleQuantity = prs.SaleQuantity,
                      BuyPrice = prs.BuyPrice,
                      SellPrice = prs.SellPrice,
                      DayOfSale = prs.DayOfSale,

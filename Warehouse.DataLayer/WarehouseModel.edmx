@@ -15,8 +15,9 @@
           <Property Name="Vendor" Type="int" Nullable="false" />
           <Property Name="SellPrice" Type="money" Nullable="false" />
           <Property Name="BuyPrice" Type="money" Nullable="false" />
-          <Property Name="DayOfPurchase" Type="date" />
+          <Property Name="DayOfPurchase" Type="date" Nullable="false" />
           <Property Name="DayOfSale" Type="date" />
+          <Property Name="SaleQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -72,6 +73,7 @@
           <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="DayOfPurchase" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="DayOfSale" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="SaleQuantity" Type="Int32" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -120,6 +122,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="WarehouseModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="SaleQuantity" ColumnName="SaleQuantity" />
                 <ScalarProperty Name="DayOfSale" ColumnName="DayOfSale" />
                 <ScalarProperty Name="DayOfPurchase" ColumnName="DayOfPurchase" />
                 <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />

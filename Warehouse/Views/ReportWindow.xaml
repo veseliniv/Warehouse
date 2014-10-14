@@ -10,7 +10,7 @@
     </Window.DataContext>
 
     <TabControl>
-        <TabItem Header="Purchases Report">
+        <TabItem  Name="PurchasesReport" Header="Purchases Report">
             <StackPanel>
                 <Grid DataContext="{Binding NewProduct}">
                     <DatePicker  Name="datePickerPurchase" SelectedDate="{Binding DayOfPurchase}"/>
@@ -28,7 +28,7 @@
                 <Button Name="PurchasesExport" Content="Purchases Export" Click="PurchasesExportClick" Grid.Column="0"/>
             </StackPanel>
         </TabItem>
-        <TabItem Header="Sales Report">
+        <TabItem Name="SalesReport" Header="Sales Report">
             <StackPanel>
                 <Grid DataContext="{Binding NewProduct}">
                     <DatePicker  Name="datePickerSale" SelectedDate="{Binding DayOfSale}"/>
@@ -37,6 +37,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Sold Quantity" Binding="{Binding SaleQuantity}" Width="*"/>
                         <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor.Name}" Width="*"/>
                         <DataGridTextColumn Header="Buy Price" Binding="{Binding SellPrice}" Width="*"/>
                         <DataGridTextColumn Header="Date Of Sale" Binding="{Binding DayOfSale}" Width="*"/>

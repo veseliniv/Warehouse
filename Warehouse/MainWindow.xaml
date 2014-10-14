@@ -13,8 +13,8 @@
             <Label Name="LableUsername" Content="Username :"/>
             <TextBox Name="TextBoxUsernameLogin" Text="{Binding Username}" Margin="10"/>
             <Label Name="LablePassword" Content="Password :"/>
-            <TextBox Name="TextBoxPassword" Text="{Binding Password}" Margin="10"/>
+            <PasswordBox Name="TextBoxPassword"  PasswordChar="*" Margin="10"/>
         </StackPanel>
-        <Button Name="ButtonLogin" Content="Login" Command="{Binding LoginUser}" Margin="10"/>
+        <Button Name="ButtonLogin" Content="Login" Command="{Binding LoginUser}" Margin="10" Click="ButtonLoginClick"/>
     </StackPanel>
 </Window>
