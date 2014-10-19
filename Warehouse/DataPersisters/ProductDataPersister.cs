@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Warehouse.DataLayer;
 using Warehouse.ViewModels;
@@ -41,35 +37,22 @@ namespace Warehouse.DataPersisters
 
             var productToAdd =
                 from pta in entity.Products
-                where ((pta.Name == product.Name) && (pta.Vendor1.Name == product.Vendor.Name)) ||
-                       (pta.Vendor1.Name == product.Vendor.Name)
+                where ((pta.Name == product.Name) && (pta.Vendor1.Name == product.Vendor.Name)) 
                 select pta;
 
-            //if (productToAdd.Count() != null)
-            //{
-                if ((product.Name.Equals(productToAdd.FirstOrDefault().Name)) && (product.Vendor.Name.Equals(productToAdd.FirstOrDefault().Vendor1.Name)))
-                {
-                    MessageBox.Show("Product " + product.Name + " exists!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else if (product.Vendor.Name.Equals(productToAdd.FirstOrDefault().Vendor1.Name))
-                {
-                    entity.Products.Add(new Product()
-                                        {
-                                            Name = product.Name,
-                                            BuyPrice = product.BuyPrice,
-                                            SellPrice = product.SellPrice,
-                                            Quantity = product.Quantity,
-                                            DayOfPurchase = DateTime.Now,
-                                            Vendor = productToAdd.FirstOrDefault().Vendor
-                                        });
+            if (productToAdd.Count() != 0)
+            {
 
-                    MessageBox.Show("Product " + product.Name + " added!", "Confirmation", MessageBoxButton.OK);
+                UpdateProduct(product);
 
-                    entity.SaveChanges();
-                }
-            //}
+            }
             else
             {
+                var productVendor =
+                    (from pv in entity.Vendors
+                    where pv.Name == product.Vendor.Name
+                    select pv).First();
+
                 entity.Products.Add(new Product()
                                     {
                                         Name = product.Name,
@@ -77,10 +60,7 @@ namespace Warehouse.DataPersisters
                                         SellPrice = product.SellPrice,
                                         Quantity = product.Quantity,
                                         DayOfPurchase = DateTime.Now,
-                                        Vendor1 = new Vendor()
-                                                  {
-                                                      Name = product.Vendor.Name
-                                                  }
+                                        Vendor = productVendor.VendorID
                                     });
 
                 MessageBox.Show("Product " + product.Name + " added!", "Confirmation", MessageBoxButton.OK);
@@ -130,6 +110,7 @@ namespace Warehouse.DataPersisters
                 {
                     item.Quantity += product.Quantity;
                     item.BuyPrice = product.BuyPrice;
+
                 }
 
                 MessageBox.Show("Product " + product.Name + " updated", "Confirmation", MessageBoxButton.OK);
